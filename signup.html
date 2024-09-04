@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://cdn.gencraft.com/prod/user/9fdf57d0-bf9a-4029-bca2-b0c7de3cc0b5/b7014816-ba21-4cf8-9a0d-c5bf37aa8c68/image/image0_0.jpg?Expires=1724994452&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4uZ2VuY3JhZnQuY29tL3Byb2QvdXNlci85ZmRmNTdkMC1iZjlhLTQwMjktYmNhMi1iMGM3ZGUzY2MwYjUvYjcwMTQ4MTYtYmEyMS00Y2Y4LTlhMGQtYzViZjM3YWE4YzY4L2ltYWdlL2ltYWdlMF8wLmpwZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyNDk5NDQ1Mn0sIkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzI0OTA4MDc1fX19XX0_&Signature=oto1Gk6Shs5cgmLSzWjq5jLxbDbYb1FVDtlYSSWKFNZ7lQuUvlHAMUbYSLBB8lnJJRkUAKm6GTx-zbHlfBSzdHoTw7CFdxCxVqWqb--g~CHOtewyjF~EMYr5kQMI~GlOuS~~GRImpXFZFmfqpevutRNEez~8eTa9XQGh-M0C97ezLBkVyzJer4nlOwuWsE9SszGj~1N8wUa7DcLkF3SJ9Sj3~r0wQM2Depp~oOCxtf5uMNs88v0L-8U5THHbuiR4NYKzjs6ntjD9FJf2gezN6cVOaR6EHqrkTTKGMzZuF4lmJ3D8iJvJU3L-X0WetQcm6ywgDoK7HlcjQDun9CrkKw__&Key-Pair-Id=K3RDDB1TZ8BHT8');
+            background-size: cover;
+            background-position: center;
+        }
+        .headline {
+            text-align: center;
+            font-size: 36px;
+            color: white;
+            margin-top: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 80vh;
+        }
+        .box {
+            width: 30%;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        .box:hover {
+            transform: scale(1.05);
+        }
+        .box img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 5px;
+        }
+        .box h2 {
+            margin-bottom: 20px;
+            color: white; /* Set text color to white */
+            font-family: 'Poppins', sans-serif; /* Stylish font */
+        }
+    </style>
+</head>
+<body>
+    <!-- Headline -->
+    <h1 class="headline"> sign up as...</h1>
+
+    <div class="container">
+        <!-- User Sign Up -->
+        <div class="box" onclick="window.location.href='loginUser.html'">
+            <img src="https://img.freepik.com/premium-vector/joyful-man-with-mobile-phone-front-view-taking-pictures-reading-chatting-smartphone-internet-addiction-vector-illustration_531064-48.jpg" alt="User">
+            <h2>User</h2>
+        </div>
+        
+        <!-- Parent Sign Up -->
+        <div class="box" onclick="window.location.href='loginParent.html'">
+            <img src="https://www.shutterstock.com/image-vector/dad-teaching-his-child-how-260nw-597408959.jpg" alt="Parent">
+            <h2>Parent or Guardian</h2>
+        </div>
+
+        <!-- Guest Sign Up -->
+        <div class="box" onclick="window.location.href='unknown.html'">
+            <img src="https://img.freepik.com/premium-vector/young-businessman-watching-smart-phone-businessman-illustration-boy-looking-phone-vector_736686-460.jpg" alt="Guest">
+            <h2>Unknown</h2>
+        </div>
+    </div>
+</body>
+</html>

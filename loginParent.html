@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parent/Guardian Register Form</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: none;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .background-image {
+            flex: 1;
+            background-image: url('parent.jpg'); /* or your updated image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh; /* Ensures the element covers the viewport height */
+        }
+
+        .login-container {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.0); /* Slightly transparent white */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.0);
+            max-width: 400px;
+            margin: auto;
+            height: auto; /* Ensures the container adjusts its height based on content */
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="number"],
+        .login-container input[type="password"],
+        .login-container input[type="email"],
+        .login-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .relationship-field {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleRelationshipField() {
+            var role = document.getElementById("role").value;
+            var relationshipField = document.getElementById("relationship-field");
+            if (role === "Guardian") {
+                relationshipField.style.display = "block";
+            } else {
+                relationshipField.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="background-image"></div>
+        <div class="login-container">
+            <h2>Parent/Guardian Register form</h2>
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" required>
+
+                <label for="email">Email ID</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required>
+
+                <label for="role">I am a</label>
+                <select id="role" name="role" onchange="toggleRelationshipField()" required>
+                    <option value="Parent">Parent</option>
+                    <option value="Guardian">Guardian</option>
+                </select>
+
+                <div id="relationship-field" class="relationship-field">
+                    <label for="relationship">Relationship to the child</label>
+                    <input type="text" id="relationship" name="relationship">
+                </div>
+
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: none;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .background-image {
+            flex: 1;
+            background-image: url('login.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .login-container {
+            flex: 1;
+            background-color: rgba(255, 255, 255, 0.0);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.0);
+            max-width: 400px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="number"],
+        .login-container input[type="password"],
+        .login-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .password-field,
+        .secret-code-container {
+            display: none;
+        }
+    </style>
+    <script>
+        function checkAge() {
+            var age = parseInt(document.getElementById("age").value, 10);
+            var passwordField = document.getElementById("password-field");
+            var secretCodeContainer = document.getElementById("secret-code-container");
+            if (age > 15) {
+                passwordField.style.display = "block";
+                secretCodeContainer.style.display = "none";
+            } else {
+                passwordField.style.display = "none";
+                secretCodeContainer.style.display = "block";
+            }
+        }
+
+        function showSecretAnswerField() {
+            var selectedQuestion = document.getElementById("secret-question").value;
+            var answerFields = document.getElementsByClassName("secret-answer-field");
+            for (var i = 0; i < answerFields.length; i++) {
+                answerFields[i].style.display = "none";
+            }
+            document.getElementById(selectedQuestion + "-answer").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="background-image"></div>
+        <div class="login-container">
+            <h2>Login Form</h2>
+            <form>
+
+		<label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required oninput="checkAge()">
+
+                <div id="password-field" class="password-field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                </div>
+
+                <div id="secret-code-container" class="secret-code-container">
+                    <label for="secret-question">Select a Secret Code Question</label>
+                    <select id="secret-question" name="secret-question" onchange="showSecretAnswerField()">
+                        <option value="">Select a question...</option>
+                        <option value="color">Favorite Colour</option>
+                        <option value="food">Favorite Food</option>
+                        <option value="person">Favorite Person</option>
+                        <option value="toy">Favorite Toy</option>
+                    </select>
+
+                    <div id="color-answer" class="secret-answer-field" style="display:none;">
+                        <label for="color">Your Favorite Colour</label>
+                        <input type="text" id="color" name="color">
+                    </div>
+                    
+                    <div id="food-answer" class="secret-answer-field" style="display:none;">
+                        <label for="food">Your Favorite Food</label>
+                        <input type="text" id="food" name="food">
+                    </div>
+                    
+                    <div id="person-answer" class="secret-answer-field" style="display:none;">
+                        <label for="person">Your Favorite Person</label>
+                        <input type="text" id="person" name="person">
+                    </div>
+
+                    <div id="toy-answer" class="secret-answer-field" style="display:none;">
+                        <label for="toy">Your Favorite Toy</label>
+                        <input type="text" id="toy" name="toy">
+                    </div>
+                </div>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

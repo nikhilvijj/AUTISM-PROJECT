@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Levels</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background: url('task.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            background-color: #333;
+            padding: 1rem;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .levels {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+        .level-container {
+            position: relative;
+            margin: 1rem;
+            text-align: center;
+        }
+        .level {
+            background-size: cover;
+            background-position: center;
+            border: 2px solid #bbb;
+            width: 200px;
+            height: 160px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            color: white;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+        .level:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .level.active {
+            border-color: #4caf50;
+        }
+        .level-number {
+            margin-bottom: 5px;
+            font-weight: bold;
+            background-color: #333;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            color: white;
+            display: inline-block;
+        }
+        .stars {
+            margin-top: 5px;
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .star {
+            width: 20px;
+            height: 20px;
+            background-color: gold;
+            clip-path: polygon(50% 0%, 61% 38%, 98% 38%, 68% 59%, 79% 95%, 50% 75%, 21% 95%, 32% 59%, 2% 38%, 39% 38%);
+        }
+        .star.empty {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <div id="nav-left">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+        </div>
+        <div id="nav-right">
+            <a href="signup.html" id="logout">Logout</a>
+            <a href="profile.html" id="profile">Profile</a>
+        </div>
+    </div>
+
+    <div class="levels" id="levels">
+        <!-- Levels will be dynamically generated here -->
+    </div>
+
+    <script>
+        const totalLevels = 10;
+        let currentLevel = 3; // example current level
+        let isLoggedIn = false; // example login status
+
+        // Example background images for levels
+        const levelBackgrounds = [
+            'url("https://w7.pngwing.com/pngs/399/964/png-transparent-bird-character-penguin-cute-animal-happy-kawaii-custom-hi-greeting.png")',
+            'url("https://img.freepik.com/free-vector/cute-bird-waving-hand-with-pilot-hat-cartoon-vector-icon-illustration-animal-nature-icon-isolated_138676-4688.jpg")',
+            'url("https://img.freepik.com/premium-photo/anime-fruit-illustrations-cute-flower-art-adorable-anime-animals-kawaii-bird-drawings_713888-18204.jpg")',
+            'url("https://thumbs.dreamstime.com/b/charming-penguin-dapper-bowtie-comical-waddle-spreading-joy-laughter-its-endearing-antics-anime-ai-generated-332095832.jpg")',
+            'url("https://thumbs.dreamstime.com/b/playful-baby-panda-tumbling-snow-cute-expression-pose-cartoon-style-digital-anime-art-animal-creatures-playful-307072443.jpg")',
+            'url("https://i.pinimg.com/736x/a7/26/2d/a7262dd93991dc40395a932dbee6c415.jpg")',
+            'url("https://img.freepik.com/premium-photo/two-puppies-sitting-pink-heart-shaped-box-generative-ai_733139-5737.jpg?w=360")',
+            'url("https://img.freepik.com/premium-photo/anime-fruit-illustrations-cute-flower-art-adorable-anime-animals-kawaii-bird-drawings_713888-21498.jpg")',
+            'url("https://img.freepik.com/premium-photo/anime-fruit-illustrations-cute-flower-art-adorable-anime-animals-kawaii-bird-drawings_713888-21523.jpg")',
+            'url("https://img.freepik.com/photos-premium/dessin-anime-animal-3d-drole-portant-vetements-fond-studio_741910-10361.jpg")'
+        ];
+
+        // Generate levels
+        const levelsContainer = document.getElementById('levels');
+        for (let i = 1; i <= totalLevels; i++) {
+            const levelContainer = document.createElement('div');
+            levelContainer.className = 'level-container';
+
+            const levelNumber = document.createElement('div');
+            levelNumber.className = 'level-number';
+            levelNumber.innerHTML = `Level ${i}`;
+            levelContainer.appendChild(levelNumber);
+
+            const level = document.createElement('div');
+            level.className = 'level';
+            level.style.backgroundImage = levelBackgrounds[i - 1];
+
+            if (i === currentLevel) {
+                level.classList.add('active');
+            }
+
+            levelContainer.appendChild(level);
+
+            // Add star rating only for levels played
+            if (i <= currentLevel) {
+                const stars = document.createElement('div');
+                stars.className = 'stars';
+                for (let j = 1; j <= 3; j++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    if (i > 5 && j > 2) { // Example condition for different ratings
+                        star.classList.add('empty');
+                    } else if (i > 8 && j > 1) {
+                        star.classList.add('empty');
+                    }
+                    stars.appendChild(star);
+                }
+                levelContainer.appendChild(stars);
+            }
+
+            level.onclick = () => alert(`Moving to Level ${i}`);
+            levelsContainer.appendChild(levelContainer);
+        }
+
+        // Handle login status
+        function updateNav() {
+            if (isLoggedIn) {
+                document.getElementById('logout').style.display = 'inline';
+                document.getElementById('profile').style.display = 'inline';
+            } else {
+                document.getElementById('logout').style.display = 'inline';
+                document.getElementById('profile').style.display = 'inline';
+            }
+        }
+
+        // Simulate login/logout
+        document.getElementById('logout').onclick = () => {
+            isLoggedIn = false;
+            updateNav();
+            window.location.href = 'signup.html'; // Redirect to login page
+        };
+
+        updateNav(); // Initial update based on login status
+    </script>
+
+</body>
+</html>

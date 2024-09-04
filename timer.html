@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24 Hour Timer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-image: url('time.jpg'); /* Replace with your image URL */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .timer-container {
+            background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3));
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            max-width: 300px;
+            width: 100%;
+        }
+
+        .timer {
+            font-size: 3em;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            color: #FF0000; /* Red color */
+        }
+
+        .message {
+            font-size: 1.5em;
+            line-height: 1.4;
+            font-weight: 300;
+            color: #dcdcdc;
+            margin-bottom: 15px;
+        }
+
+        .link {
+            display: block;
+            font-size: 1em;
+            color: #00bfff; /* Light blue color */
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="timer-container">
+        <div class="timer" id="timer">24:00:00</div>
+        <div class="message">Your RESULTS will be out soon</div>
+        <a href="https://example.com" class="link" target="_blank">Click here to know more about us</a>
+    </div>
+
+    <script>
+        function updateTimer() {
+            const endTime = new Date().getTime() + 24 * 60 * 60 * 1000; // Set timer for 24 hours from now
+
+            function formatTime(ms) {
+                const totalSeconds = Math.floor(ms / 1000);
+                const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+                const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+                const seconds = String(totalSeconds % 60).padStart(2, '0');
+                return `${hours}:${minutes}:${seconds}`;
+            }
+
+            function update() {
+                const now = new Date().getTime();
+                const timeLeft = endTime - now;
+                if (timeLeft <= 0) {
+                    document.getElementById('timer').textContent = '00:00:00';
+                } else {
+                    document.getElementById('timer').textContent = formatTime(timeLeft);
+                    setTimeout(update, 1000);
+                }
+            }
+
+            update();
+        }
+
+        updateTimer();
+    </script>
+</body>
+</html>

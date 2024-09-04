@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            background: url('questions.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+        }
+
+        .music-control {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .music-icon {
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .music-icon:hover {
+            color: #ff7e5f;
+        }
+
+        h1 {
+            margin-top: 60px; /* Increased margin to make room for the music control */
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(to right, black, black);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 10px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.1);
+        }
+
+        .question-block {
+            width: 400px;
+            background-color: #d0e8f2;
+            padding: 8px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.0);
+        }
+
+        .question-block:nth-child(2n) {
+            background-color: #e8d0f2;
+        }
+
+        .question-block:nth-child(3n) {
+            background-color: #f2d0e8;
+        }
+
+        .question-block:nth-child(4n) {
+            background-color: #d0f2e8;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        #button-container {
+            display: flex;
+            justify-content: space-between;
+            width: 400px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 48%;
+        }
+
+        #reset-button {
+            background-color: #f2a65a;
+        }
+
+        #submit-button {
+            background-color: #87b2d8;
+        }
+    </style>
+</head>
+<body>
+    <div class="music-control">
+        <span id="music-icon" class="music-icon">🔊</span>
+        <audio id="background-music" loop>
+            <source src="your-music-file.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <h1>ANSWER WITH HEART FOR BEST OUTPUT ^-^</h1>
+
+    <div id="question-container">
+        <div class="question-block">
+            <p>1. What is your name?</p>
+            <input type="text" id="answer-1" placeholder="Type your answer here">
+        </div>
+        <div class="question-block">
+            <p>2. What is your interests?</p>
+            <input type="text" id="answer-2" placeholder="Type your answer here">
+        </div>
+        <div class="question-block">
+            <p>3. Who is your favorite person?</p>
+            <input type="text" id="answer-3" placeholder="Type your answer here">
+        </div>
+        <div class="question-block">
+            <p>4. What is your dream job?</p>
+            <input type="text" id="answer-4" placeholder="Type your answer here">
+        </div>
+    </div>
+
+    <div id="button-container">
+        <button id="reset-button" onclick="resetQuiz()">Reset</button>
+        <button id="submit-button" onclick="submitQuiz()">Submit</button>
+    </div>
+
+    <script>
+        const musicIcon = document.getElementById('music-icon');
+        const backgroundMusic = document.getElementById('background-music');
+
+        // Function to toggle music play/pause
+        function toggleMusic() {
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                musicIcon.textContent = '🔊'; // Music playing
+            } else {
+                backgroundMusic.pause();
+                musicIcon.textContent = '🔇'; // Music paused
+            }
+        }
+
+        // Event listener for music icon
+        musicIcon.addEventListener('click', toggleMusic);
+
+        // Start music by default
+        backgroundMusic.play();
+        musicIcon.textContent = '🔊'; // Music is playing
+
+        function resetQuiz() {
+            const inputs = document.querySelectorAll('input[type="text"]');
+            inputs.forEach(input => input.value = '');
+        }
+
+        function submitQuiz() {
+            const answers = [];
+            for (let i = 1; i <= 4; i++) {
+                const answer = document.getElementById(`answer-${i}`).value;
+                if (answer.trim() === '') {
+                    alert(`Please provide an answer for Question ${i}.`);
+                    return;
+                }
+                answers.push(`Question ${i}: ${answer}`);
+            }
+            alert("Quiz Submitted! Your answers:\n" + answers.join('\n'));
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get to Know You</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+            background-image: url('https://cdn.gencraft.com/prod/user/9fdf57d0-bf9a-4029-bca2-b0c7de3cc0b5/f89c0721-8e47-4cd4-8492-5d81ef825f6e/image/image0_0.jpg?Expires=1724996596&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4uZ2VuY3JhZnQuY29tL3Byb2QvdXNlci85ZmRmNTdkMC1iZjlhLTQwMjktYmNhMi1iMGM3ZGUzY2MwYjUvZjg5YzA3MjEtOGU0Ny00Y2Q0LTg0OTItNWQ4MWVmODI1ZjZlL2ltYWdlL2ltYWdlMF8wLmpwZyIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyNDk5NjU5Nn0sIkRhdGVHcmVhdGVyVGhhbiI6eyJBV1M6RXBvY2hUaW1lIjoxNzI0OTEwMjE3fX19XX0_&Signature=n~aG8L60YglOHvCGE73~yCglvCP2~6MN~pyk63tM4qa3gacOqSVpbvii38P0tp1FadhaMO1TWo3Qhl4udcxg~E-SfDTIldPvHxfWHX-TSQ0s-H~cxNnj-jOtwIje4hoz61ZInpYbLfKhFd6GoeNgpDotVMWGnHiMlzr-Ir-24rNS1-bl55jL-ZoT-NPtXMkGyhQXfKGVrS3Jl9kY53uLiPLKJ8XJinOBOleVW2jrgxHKoUqvArN-iBXYQ~wwG6a75r2Tv8P5ZtIlnuZcyyRyTPqG2kVyxIQUllPkw3DqkYj5RRaL46HFI0NxS23-tB2NPi1Bg9ujbcC9nIWg5iq5rA__&Key-Pair-Id=K3RDDB1TZ8BHT8');
+            background-size: cover;
+            background-position: center;
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .heading {
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: white;
+        }
+        .question-container {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question label {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: white;
+        }
+        .question input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+        }
+        .form-buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .submit-button, .next-button, .previous-button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        .next-button {
+            background-color: #28a745;
+        }
+        .previous-button {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <!-- Heading -->
+        <div class="heading">
+            Let me to know<br>about Yourself!
+        </div>
+
+        <!-- Questions -->
+        <form id="userForm" onsubmit="return validateForm()">
+            <div class="question-container" id="question1">
+                <div class="question">
+                    <label for="name">What is your name?</label>
+                    <input type="text" id="name" name="name">
+                </div>
+            </div>
+            <div class="question-container" id="question2" style="display: none;">
+                <div class="question">
+                    <label for="self">What do you think about yourself?</label>
+                    <input type="text" id="self" name="self">
+                </div>
+            </div>
+	
+            <!-- Add more question containers here, each with a unique id and initially hidden -->
+
+            <div class="form-buttons">
+                <button type="button" class="previous-button" onclick="previousQuestion()" style="display: none;">Previous</button>
+                <button type="button" class="next-button" onclick="nextQuestion()">Next</button>
+                <button type="submit" class="submit-button" style="display: none;">Submit</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        let currentQuestion = 1;
+        const totalQuestions = 2; // Update this as you add more questions
+
+        function nextQuestion() {
+            const currentInput = document.querySelector(`#question${currentQuestion} input`);
+            if (currentInput && currentInput.value.trim() !== '') {
+                const current = document.getElementById(`question${currentQuestion}`);
+                const next = document.getElementById(`question${currentQuestion + 1}`);
+                if (current && next) {
+                    current.style.display = 'none';
+                    next.style.display = 'block';
+                    currentQuestion++;
+                    document.querySelector('.previous-button').style.display = 'block';
+                    if (currentQuestion === totalQuestions) {
+                        document.querySelector('.submit-button').style.display = 'block';
+                        document.querySelector('.next-button').style.display = 'none';
+                    }
+                }
+            } else {
+                alert('Please fill out the field before proceeding.');
+            }
+        }
+
+        function previousQuestion() {
+            const current = document.getElementById(`question${currentQuestion}`);
+            const previous = document.getElementById(`question${currentQuestion - 1}`);
+            if (current && previous) {
+                current.style.display = 'none';
+                previous.style.display = 'block';
+                currentQuestion--;
+                if (currentQuestion === 1) {
+                    document.querySelector('.previous-button').style.display = 'none';
+                }
+                document.querySelector('.next-button').style.display = 'block';
+                document.querySelector('.submit-button').style.display = 'none';
+            }
+        }
+
+        function validateForm() {
+            const inputs = document.querySelectorAll('input');
+            for (let input of inputs) {
+                if (input.value.trim() === '') {
+                    alert('Please fill out all fields.');
+                    return false;
+                }
+            }
+            window.location.href = 'signup.html'; // Replace with your desired URL
+            return false; // Prevent default form submission
+        }
+    </script>
+</body>
+</html>
